@@ -8,10 +8,11 @@ import path from 'path'
 import productRoutes from './module/product/product.routes.js'
 import shopifyRouter from './module/shopify/shopify.routes.js'
 config({path: path.resolve('./config/.env')})
-
+import cors from "cors"
 // import { ApiVersion, shopifyApi } from '@shopify/shopify-api';
 
 app.use(express.json());
+app.use(cors())
 connectionDB()
 
 app.get('/', (req, res) => res.send('Hello World!'))
@@ -59,7 +60,6 @@ app.get('/', (req, res) => res.send('Hello World!'))
 
 
 
-app.use(express.json())
 
 app.use(userRoutes)
 app.use(productRoutes)
