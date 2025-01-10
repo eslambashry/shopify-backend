@@ -14,6 +14,8 @@ config({path: path.resolve('./config/.env')})
 app.use(express.json());
 connectionDB()
 
+app.get('/', (req, res) => res.send('Hello World!'))
+
 
 // const shopify = shopifyApi({
 //     apiKey: process.env.SHOPIFY_API_KEY,
@@ -63,6 +65,5 @@ app.use(userRoutes)
 app.use(productRoutes)
 app.use(shopifyRouter)
 
-app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
