@@ -9,6 +9,8 @@ import color from "@colors/colors"
 config({path: path.resolve('./config/.env')})
 import cors from "cors"
 
+app.get('/', (req, res) => res.send('Hello World!'.bgBlack))
+
 // import authRoutes from './module/auth/authRoutes.js'
 // import { shopify } from './config/shopify.js'
 // import { sessionHandler } from './middleware/sessionHandler.js'
@@ -41,6 +43,5 @@ app.use(productRoutes)
 
 
 
-app.get('/', (req, res) => res.send('Hello World!'.bgBlack))
 app.listen(port, () => console.log(`Example app listening on port ${port}!`.random.bold))
 
