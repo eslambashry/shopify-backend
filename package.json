@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@colors/colors": "^1.6.0",
     "@shopify/shopify-api": "^11.7.0",
     "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
@@ -19,7 +20,9 @@
     "dotenv": "^16.4.7",
     "env": "^0.0.2",
     "express": "^4.21.2",
+    "express-session": "^1.18.1",
     "mongoose": "^8.9.4",
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "shopify-api-node": "^3.14.1"
   }
 }

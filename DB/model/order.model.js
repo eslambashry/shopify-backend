@@ -1,19 +1,52 @@
 import {Schema,model} from 'mongoose';
 
+// Order Schema and Model
 const orderSchema = new Schema({
-  shopifyOrderId: { type: String, required: true, unique: true },
-  checkoutId: { type: String, required: true },
-  customerName: String,
-  customerEmail: String,
-  totalPrice: { type: Number, required: true },
-  items: [{
-    productId: { type: Schema.Types.ObjectId, ref: 'Product' },
-    quantity: { type: Number, required: true },
-    price: { type: Number, required: true },
-  }],
-  orderStatus: { type: String, required: true },
+  shopifyId:{type: String},
+  email: { type: String, required: true },
+  customer: {
+    id: { type: String },
+    firstName: { type: String },
+    lastName: { type: String },
+    email: { type: String },
+    defaultAddress: {
+      address1: { type: String },
+      city: { type: String },
+      province: { type: String },
+      country: { type: String },
+      zip: { type: String },
+    },
+  },
+  lineItems: [
+    {
+      id: { type: String },
+      title: { type: String },
+      quantity: { type: Number },
+      price: { type: String },
+      sku: { type: String },
+    },
+  ],
+  totalPrice: { type: String },
+  currency: { type: String },
+  createdAt: { type: Date },
+  updatedAt: { type: Date },
+  billingAddress: {
+    address1: { type: String },
+    city: { type: String },
+    province: { type: String },
+    country: { type: String },
+    zip: { type: String },
+  },
+  shippingAddress: {
+    address1: { type: String },
+    city: { type: String },
+    province: { type: String },
+    country: { type: String },
+    zip: { type: String },
+  },
 });
 
-const Order = model('Order', orderSchema);
+const orderModel = model('Order', orderSchema);
 
-export default Order;
+
+export default orderModel;
