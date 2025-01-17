@@ -13,7 +13,7 @@ app.get('/', (req, res) => res.send('Hello World!'.bgBlack))
 
 // import authRoutes from './module/auth/authRoutes.js'
 // import { shopify } from './config/shopify.js'
-// import { sessionHandler } from './middleware/sessionHandler.js'
+// import { sessionHanx dler } from './middleware/sessionHandler.js'
 
 import customerRoutes from './module/customers/customer.routes.js'
 import productRoutes from './module/products/product.routes.js'
