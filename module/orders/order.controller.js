@@ -7,10 +7,13 @@ import orderModel from '../../DB/model/order.model.js';
 
 export const fetchOrders = async (req, res) => {
   try {
-    // Fetch orders from Shopify
-    const url = `https://${process.env.SHOPIFY_STORE}.myshopify.com/admin/api/2025-01/orders.json?status=any`;
-    const response = await axios.get(url,
-      {
+    const url = `https://${process.env.SHOPIFY_STORE}.myshopify.com/admin/api/2023-10/orders.json?status=any`;
+
+    console.log("Fetching from URL:", url);
+    console.log("Shopify Store:", process.env.SHOPIFY_STORE);
+    console.log("Shopify Token:", process.env.SHOPIFY_API_TOKEN_PASSWORD);
+
+    const response = await axios.get(url, {
       headers: {
         "Content-Type": "application/json",
         "X-Shopify-Access-Token": process.env.SHOPIFY_API_TOKEN_PASSWORD,
@@ -19,9 +22,8 @@ export const fetchOrders = async (req, res) => {
 
     const orders = response.data.orders;
 
-    // console.log(orders);
-    
-    // Save or update orders in MongoDB
+    console.log("Orders fetched:", orders);
+
     for (const order of orders) {
       const orderData = {
         shopifyId: order.id,
@@ -48,7 +50,6 @@ export const fetchOrders = async (req, res) => {
         shippingAddress: order.shipping_address,
       };
 
-      // Upsert order in MongoDB
       await orderModel.findOneAndUpdate(
         { shopifyId: order.id },
         orderData,
@@ -56,9 +57,13 @@ export const fetchOrders = async (req, res) => {
       );
     }
 
-    res.status(200).json({ message: 'Orders fetched and stored successfully.',orders });
+    res.status(200).json({ message: 'Orders fetched and stored successfully.', orders });
   } catch (error) {
     console.error('Error fetching orders:', error.message);
+    if (error.response) {
+      console.error('Response data:', error.response.data);
+      console.error('Response status:', error.response.status);
+    }
     res.status(500).json({ error: 'Failed to fetch orders' });
   }
 };
