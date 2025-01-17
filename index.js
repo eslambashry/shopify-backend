@@ -9,7 +9,7 @@ import color from "@colors/colors"
 config({path: path.resolve('./config/.env')})
 import cors from "cors"
 
-app.get('/', (req, res) => res.send('Hello World!'.bgBlack))
+app.get('/', (req, res) => res.send('Hello World!'.random.bgBlack))
 
 // import authRoutes from './module/auth/authRoutes.js'
 // import { shopify } from './config/shopify.js'
